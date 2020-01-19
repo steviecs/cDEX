@@ -1,0 +1,58 @@
+﻿@page "/fetchdata"
+
+@using blazor_crypto_marketcap.Data
+@inject CoinMetricService CoinService
+
+<h1>Coin Metrics</h1>
+
+<p>This component demonstrates fetching data from a an API service.</p>
+
+@if (coins == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Symbol</th>
+                <th>Value</th>
+                <th>Circulating Supply</th>
+                <th>Total Supply</th>
+                <th>Max Supply</th>
+                <th># of Market Pairs</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var metric in coins.data)
+            {
+                <tr>
+                    <td>@IncrementCount()</td>
+                    <td>@metric.symbol.ToString()</td>
+                    <td>$@Math.Round(metric.quote.USD.price, 2).ToString()</td>
+                    <td>@metric.circulating_supply.ToString()</td>
+                    <td>@metric.total_supply.ToString()</td>
+                    <td>@metric.max_supply.ToString()</td>
+                    <td>@metric.num_market_pairs.ToString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    RootObject coins;
+    int index = 1;
+
+    protected override async Task OnInitializedAsync()
+    {
+        coins = await CoinService.GetTopOneHundredCoinsByMarketCap();
+    }
+
+    private int IncrementCount()
+    {
+        return index++;
+    }
+}
