@@ -2,6 +2,9 @@
 
 @using blazor_crypto_marketcap.Data
 @inject CoinMetricService CoinService
+@inject IJSRuntime JsRuntime
+@using Microsoft.AspNetCore.ProtectedBrowserStorage
+@inject ProtectedSessionStorage ProtectedSessionStore
 
 <h1>Coin Metrics</h1>
 
@@ -16,22 +19,22 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Symbol</th>
-                <th>Value</th>
-                <th>Circulating Supply</th>
-                <th>Total Supply</th>
-                <th>Max Supply</th>
-                <th># of Market Pairs</th>
+                <th><span class="sort-link">Id</span></th>
+                <th @onclick="@(e => SortTable("symbol"))"><span class="sort-link">Symbol</span></th>
+                <th @onclick="@(e => SortTable("price"))"><span class="sort-link">Value</span></th>
+                <th @onclick="@(e => SortTable("circulating_supply"))"><span class="sort-link">Circulating Supply</span></th>
+                <th @onclick="@(e => SortTable("total_supply"))"><span class="sort-link">Total Supply</span></th>
+                <th @onclick="@(e => SortTable("max_supply"))"><span class="sort-link">Max Supply</span></th>
+                <th @onclick="@(e => SortTable("num_market_pairs"))"><span class="sort-link"># of Market Pairs</span></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var metric in coins.data)
             {
                 <tr>
-                    <td>@IncrementCount()</td>
+                    <td></td>
                     <td>@metric.symbol.ToString()</td>
-                    <td>$@Math.Round(metric.quote.USD.price, 2).ToString()</td>
+                    <td>$@metric.quote.USD.price.ToString()</td>
                     <td>@metric.circulating_supply.ToString()</td>
                     <td>@metric.total_supply.ToString()</td>
                     <td>@metric.max_supply.ToString()</td>
@@ -44,11 +47,35 @@ else
 
 @code {
     RootObject coins;
-    int index = 1;
 
-    protected override async Task OnInitializedAsync()
+    int index = 1;
+    string? sortType { get; set; }
+    public static int currentCount { get; set; } 
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        coins = await CoinService.GetTopOneHundredCoinsByMarketCap();
+        if (firstRender)
+        {
+            await LoadStateAsync();
+            StateHasChanged();
+        }
+    }
+
+
+    private async Task LoadStateAsync()
+    {
+        sortType = await ProtectedSessionStore.GetAsync<string>("sortType");
+        coins = await CoinService.GetTopOneHundredCoinsByMarketCap(sortType);
+    }
+
+    private async Task SortTable(string columnName)
+    {
+        currentCount++;
+        sortType = columnName;
+
+        await ProtectedSessionStore.SetAsync("clickCount", currentCount);
+        await ProtectedSessionStore.SetAsync("sortType", columnName);
+        await JsRuntime.InvokeAsync<object>("reloadPage");
     }
 
     private int IncrementCount()

@@ -43,9 +43,17 @@
       "frameworks": {
         "netcoreapp3.0": {
           "dependencies": {
+            "Blazored.LocalStorage": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
             "Json.Net": {
               "target": "Package",
               "version": "[1.0.18, )"
+            },
+            "Microsoft.AspNetCore.ProtectedBrowserStorage": {
+              "target": "Package",
+              "version": "[0.1.0-alpha.19521.1, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

@@ -12,4 +12,7 @@
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)microsoft.aspnetcore.protectedbrowserstorage\0.1.0-alpha.19521.1\buildTransitive\Microsoft.AspNetCore.ProtectedBrowserStorage.props" Condition="Exists('$(NuGetPackageRoot)microsoft.aspnetcore.protectedbrowserstorage\0.1.0-alpha.19521.1\buildTransitive\Microsoft.AspNetCore.ProtectedBrowserStorage.props')" />
+  </ImportGroup>
 </Project>

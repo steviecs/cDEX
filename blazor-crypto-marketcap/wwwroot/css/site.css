@@ -188,4 +188,9 @@ app {
     table, tr {
         color: #64CAFF;
     }
+
+    .sort-link {
+        cursor: pointer;
+        text-decoration: underline;
+    }
 }

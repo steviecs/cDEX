@@ -23,6 +23,7 @@ namespace blazor_crypto_marketcap
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<CoinMetricService>();
+            services.AddProtectedBrowserStorage();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

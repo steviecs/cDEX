@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using Json.Net;
 using Newtonsoft.Json;
+using static blazor_crypto_marketcap.Pages.FetchData;
 
 namespace blazor_crypto_marketcap.Data
 {
@@ -21,18 +22,28 @@ namespace blazor_crypto_marketcap.Data
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             queryString["start"] = "1";
             queryString["limit"] = "100";
-            if(sortType != null)
+            if (sortType != null)
             {
-                queryString["sort"] = sortType; 
+                queryString["sort"] = sortType;
+                if (currentCount % 2 == 0)
+                {
+                    queryString["sort_dir"] = "desc";
+                }
+                else
+                {
+                    queryString["sort_dir"] = "asc";
+                }
             }
 
             URL.Query = queryString.ToString();
 
-            var client = new WebClient();
-            client.Headers.Add("X-CMC_PRO_API_KEY", API_KEY);
-            client.Headers.Add("Accepts", "application/json");
+            using (var client = new WebClient())
+            {
+                client.Headers.Add("X-CMC_PRO_API_KEY", API_KEY);
+                client.Headers.Add("Accepts", "application/json");
 
-            return Task.FromResult(JsonConvert.DeserializeObject<RootObject>(client.DownloadString(URL.ToString())));
+                return Task.FromResult(JsonConvert.DeserializeObject<RootObject>(client.DownloadString(URL.ToString())));
+            }
         }
     }
 }
