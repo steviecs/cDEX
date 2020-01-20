@@ -1,13 +1,14 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: Courier, monospace;
+    font-family: Consolas;
     background-color: #24374A;
     color: #64CAFF;
+    font-weight: bold;
 }
 
 h1 {
-    color: #EC6757;
+    color: #F46957;
     font-weight: bold;
 }
 
@@ -39,7 +40,7 @@ app {
 
 .main .top-row {
     background-color: #24374A;
-    border-bottom: 1px solid #438081;
+    border-bottom: 1px solid #63C9B8;
     justify-content: flex-end;
 }
 
@@ -49,7 +50,7 @@ app {
 
 .sidebar {
     background-color: #24374A;
-    border-right: 2px solid #438081;
+    border-right: 1.5px solid #63C9B8;
 }
 
 .sidebar .top-row {
@@ -166,12 +167,12 @@ app {
     }
 
     table, th {
-        color: #EC6757;
+        color: #FFAD30;
     }
 
-    table, th, tr, tbody, thead {
-        border-top: 2px solid #438081;
-        border-bottom: 2px solid #438081;
+    table, th, tr, tbody, thead, td {
+        border-top: 1.5px solid #63C9B8;
+        border-bottom: 1.5px solid #63C9B8;
         border-right: none;
         border-left: none;
     }
@@ -180,17 +181,29 @@ app {
         border: none;
     }
 
-    table tr:active {
-        background-color: #e7d757;
-        color: #24374A;
-    }
-
     table, tr {
         color: #64CAFF;
     }
 
     .sort-link {
         cursor: pointer;
-        text-decoration: underline;
+    }
+
+    .table-rows:hover {
+        background-color: #e7d757;
+        color: #24374A;
+    }
+
+    .table-rows:active {
+        background-color: #e7d757;
+        color: #24374A;
+    }
+
+    .positive {
+        color: #63C9B8;
+    }
+
+    .negative {
+        color: #F46957;
     }
 }

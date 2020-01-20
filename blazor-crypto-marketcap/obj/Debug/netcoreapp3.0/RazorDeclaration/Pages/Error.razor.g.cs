@@ -76,6 +76,13 @@ using blazor_crypto_marketcap.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 10 "C:\Users\Stevie\source\repos\blazor-crypto-marketcap\blazor-crypto-marketcap\_Imports.razor"
+using ChartJs.Blazor;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/error")]
     public class Error : Microsoft.AspNetCore.Components.ComponentBase
     {

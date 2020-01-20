@@ -6,9 +6,7 @@
 @using Microsoft.AspNetCore.ProtectedBrowserStorage
 @inject ProtectedSessionStorage ProtectedSessionStore
 
-<h1>Coin Metrics</h1>
-
-<p>This component demonstrates fetching data from a an API service.</p>
+<p>This component demonstrates fetching data from an API</p>
 
 @if (coins == null)
 {
@@ -19,34 +17,50 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th><span class="sort-link">Id</span></th>
-                <th @onclick="@(e => SortTable("symbol"))"><span class="sort-link">Symbol</span></th>
-                <th @onclick="@(e => SortTable("price"))"><span class="sort-link">Value</span></th>
-                <th @onclick="@(e => SortTable("circulating_supply"))"><span class="sort-link">Circulating Supply</span></th>
-                <th @onclick="@(e => SortTable("total_supply"))"><span class="sort-link">Total Supply</span></th>
-                <th @onclick="@(e => SortTable("max_supply"))"><span class="sort-link">Max Supply</span></th>
-                <th @onclick="@(e => SortTable("num_market_pairs"))"><span class="sort-link"># of Market Pairs</span></th>
+                <th><span class="sort-link">#</span></th>
+                <th @onclick="@(e => SortTable("symbol"))"><span class="sort-link">Name</span></th>
+                <th @onclick="@(e => SortTable("price"))"><span class="sort-link">Price</span></th>
+                <th @onclick="@(e => SortTable("market_cap"))"><span class="sort-link">Market Cap</span></th>
+                <th @onclick="@(e => SortTable("volume_24h"))"><span class="sort-link">Volume (24h)</span></th>
+                <th @onclick="@(e => SortTable("percent_change_1h"))"><span class="sort-link">Change (1h)</span></th>
+                <th @onclick="@(e => SortTable("percent_change_24h"))"><span class="sort-link">Change (24h)</span></th>
+                <th @onclick="@(e => SortTable("percent_change_7d"))"><span class="sort-link">Change (7d)</span></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var metric in coins.data)
             {
-                <tr>
-                    <td></td>
-                    <td>@metric.symbol.ToString()</td>
-                    <td>$@metric.quote.USD.price.ToString()</td>
-                    <td>@metric.circulating_supply.ToString()</td>
-                    <td>@metric.total_supply.ToString()</td>
-                    <td>@metric.max_supply.ToString()</td>
-                    <td>@metric.num_market_pairs.ToString()</td>
-                </tr>
+            <tr class="table-rows" onclick="location.href='/chart/@metric.symbol.ToString()'">
+                <td>></td>
+                <td>@metric.symbol.ToString()</td>
+                <td>$@metric.quote.USD.price.ToString()</td>
+                <td>$@metric.quote.USD.market_cap.ToString()</td>
+                <td>$@metric.quote.USD.volume_24h.ToString()</td>
+
+                @if (@metric.quote.USD.percent_change_1h.ToString().Contains("-") ||
+                   @metric.quote.USD.percent_change_24h.ToString().Contains("-") ||
+                   @metric.quote.USD.percent_change_7d.ToString().Contains("-"))
+                {
+                    <td class="negative">@metric.quote.USD.percent_change_1h.ToString()</td>
+                    <td class="negative">@metric.quote.USD.percent_change_24h.ToString()</td>
+                    <td class="negative">@metric.quote.USD.percent_change_7d.ToString()</td>
+                }
+                else
+                {
+                    <td class="positive">@metric.quote.USD.percent_change_1h.ToString()</td>
+                    <td class="positive">@metric.quote.USD.percent_change_24h.ToString()</td>
+                    <td class="positive">@metric.quote.USD.percent_change_7d.ToString()</td>
+                }
+            </tr>
             }
         </tbody>
     </table>
 }
 
 @code {
-    RootObject coins;
+    public static RootObject coins;
+    List<Datum> datum = new List<Datum>();
+    
 
     int index = 1;
     string? sortType { get; set; }
@@ -60,7 +74,6 @@ else
             StateHasChanged();
         }
     }
-
 
     private async Task LoadStateAsync()
     {

@@ -1,0 +1,67 @@
+﻿@page "/chart/{symbol}"
+
+@using blazor_crypto_marketcap.Data
+@inject CoinMetricService CoinService
+@using Microsoft.AspNetCore.ProtectedBrowserStorage
+@inject ProtectedSessionStorage ProtectedSessionStore
+@using ChartJs.Blazor.Charts
+@using ChartJs.Blazor.ChartJS.LineChart
+@using ChartJs.Blazor.ChartJS.Common.Properties
+@using ChartJs.Blazor.ChartJS.Common
+
+<h1>@Symbol</h1>
+
+<p>This component demonstrates fetching charting data from an API</p>
+
+@if (lineConfig == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <ChartJsLineChart @ref="lineChartJs" Config="@lineConfig" Width="600" Height="300" />
+}
+
+@code {
+
+    [Parameter]
+    public string Symbol { get; set; }
+
+    LineConfig lineConfig;
+    ChartJsLineChart lineChartJs;
+    private LineDataset<Point> pointDataset;
+    private Random rnd = new Random();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var historicalData = CoinService.GetHistoricalChartData(Symbol);
+
+        var data = historicalData.Result.Data.Datum;
+
+        lineConfig = new LineConfig()
+        {
+            Options = new LineOptions()
+            {
+                Title = new OptionsTitle()
+                {
+                    Display = true,
+                    Text = "Stonks"
+                },
+                Responsive = true
+            }
+        };
+
+       //lineConfig.Data.Labels.AddRange(new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N" });
+
+        pointDataset = new LineDataset<Point>()
+        {
+            BackgroundColor = "#24374A",
+            BorderWidth = 0,
+            BorderColor = "#438081",
+        };
+
+        pointDataset.AddRange(Enumerable.Range(1, 10).Select(i => new Point(i, rnd.Next(30))));
+
+        lineConfig.Data.Datasets.Add(pointDataset);
+    }
+}

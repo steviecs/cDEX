@@ -76,6 +76,13 @@ using blazor_crypto_marketcap.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 10 "C:\Users\Stevie\source\repos\blazor-crypto-marketcap\blazor-crypto-marketcap\_Imports.razor"
+using ChartJs.Blazor;
+
+#line default
+#line hidden
+#nullable disable
     public class MainLayout : LayoutComponentBase
     {
         #pragma warning disable 1998
