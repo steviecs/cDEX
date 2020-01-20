@@ -1,0 +1,39 @@
+﻿@page "/rss"
+@using blazor_crypto_marketcap.Data;
+
+<h4>latest crypto news</h4>
+
+<p>this component demonstrates subscribing to an rss feed</p>
+
+@if (feeds == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    counter = 0;
+    <table class='table'>
+        <tbody>
+            @foreach (var feed in feeds)
+            {
+                <tr class="table-rows" id="link" href="/@feed.Link2">
+                    > @feed.Title.ToLower()
+                    <br />
+                    <p>  @feed.PubDate</p>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@code {
+    IEnumerable<Item> feeds;
+    int counter;
+
+    protected override async Task OnInitializedAsync()
+    {
+        //feeds = null;
+        feeds = FeedService.GetFeed();
+    }
+
+}
+

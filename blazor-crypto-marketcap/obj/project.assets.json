@@ -2438,6 +2438,15 @@
           }
         }
       },
+      "System.ServiceModel.Syndication/4.7.0": {
+        "type": "package",
+        "compile": {
+          "ref/netcoreapp2.1/System.ServiceModel.Syndication.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.ServiceModel.Syndication.dll": {}
+        }
+      },
       "System.Text.Encoding/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2641,6 +2650,15 @@
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "WilderMinds.RssSyndication/1.6.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/WilderMinds.RssSyndication.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/WilderMinds.RssSyndication.dll": {}
         }
       }
     }
@@ -7622,6 +7640,33 @@
         "system.security.securestring.nuspec"
       ]
     },
+    "System.ServiceModel.Syndication/4.7.0": {
+      "sha512": "uqGE0hFhoE6w7SxBchhR+ebdf4krpnZe3FPdo7skxJZHOqwcGk+cDZ74Yfp3yFD2yl3emHBGAZb6SBsQWEaSkg==",
+      "type": "package",
+      "path": "system.servicemodel.syndication/4.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.ServiceModel.Syndication.dll",
+        "lib/net461/System.ServiceModel.Syndication.xml",
+        "lib/netstandard2.0/System.ServiceModel.Syndication.dll",
+        "lib/netstandard2.0/System.ServiceModel.Syndication.xml",
+        "ref/net461/System.ServiceModel.Syndication.dll",
+        "ref/net461/System.ServiceModel.Syndication.xml",
+        "ref/netcoreapp2.1/System.ServiceModel.Syndication.dll",
+        "ref/netcoreapp2.1/System.ServiceModel.Syndication.xml",
+        "ref/netstandard2.0/System.ServiceModel.Syndication.dll",
+        "ref/netstandard2.0/System.ServiceModel.Syndication.xml",
+        "runtimes/win/lib/net461/System.ServiceModel.Syndication.dll",
+        "runtimes/win/lib/net461/System.ServiceModel.Syndication.xml",
+        "system.servicemodel.syndication.4.7.0.nupkg.sha512",
+        "system.servicemodel.syndication.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "System.Text.Encoding/4.3.0": {
       "sha512": "BiIg+KWaSDOITze6jGQynxg64naAPtqGHBwDrLaCtixsa5bKiR8dpPOHA7ge3C0JJQizJE+sfkz1wV+BAKAYZw==",
       "type": "package",
@@ -8366,6 +8411,18 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "WilderMinds.RssSyndication/1.6.0": {
+      "sha512": "OkWp46Z6wDPjyzA+kd2TGB6ToClu3caexBxd6MqE5+cJMOIhfvO6Co6VUtaZa5u9Bq+9k/bJn+cqgwCN/UHrkw==",
+      "type": "package",
+      "path": "wilderminds.rsssyndication/1.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/WilderMinds.RssSyndication.dll",
+        "wilderminds.rsssyndication.1.6.0.nupkg.sha512",
+        "wilderminds.rsssyndication.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -8378,7 +8435,9 @@
       "Microsoft.EntityFrameworkCore.Tools >= 3.0.0",
       "Microsoft.Extensions.Logging.Debug >= 3.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.0.0",
-      "Newtonsoft.Json >= 12.0.3"
+      "Newtonsoft.Json >= 12.0.3",
+      "System.ServiceModel.Syndication >= 4.7.0",
+      "WilderMinds.RssSyndication >= 1.6.0"
     ]
   },
   "packageFolders": {
@@ -8462,6 +8521,14 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[12.0.3, )"
+          },
+          "System.ServiceModel.Syndication": {
+            "target": "Package",
+            "version": "[4.7.0, )"
+          },
+          "WilderMinds.RssSyndication": {
+            "target": "Package",
+            "version": "[1.6.0, )"
           }
         },
         "imports": [

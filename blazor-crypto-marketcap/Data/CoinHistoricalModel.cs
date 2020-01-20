@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace blazor_crypto_marketcap.Data
 {
@@ -13,15 +10,15 @@ namespace blazor_crypto_marketcap.Data
 
         public class Datum
         {
-            public int time { get; set; }
-            public double high { get; set; }
-            public double low { get; set; }
-            public double open { get; set; }
-            public double volumefrom { get; set; }
-            public double volumeto { get; set; }
-            public double close { get; set; }
-            public string conversionType { get; set; }
-            public string conversionSymbol { get; set; }
+            public int Time { get; set; }
+            public double High { get; set; }
+            public double Low { get; set; }
+            public double Open { get; set; }
+            public double VolumeFrom { get; set; }
+            public double VolumeTo { get; set; }
+            public double Close { get; set; }
+            public string ConversionType { get; set; }
+            public string ConversionSymbol { get; set; }
         }
 
         public class Data

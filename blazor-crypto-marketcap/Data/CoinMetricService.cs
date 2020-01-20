@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json;
 using static blazor_crypto_marketcap.Data.CoinHistoricalData;
-using static blazor_crypto_marketcap.Pages.FetchData;
+using static blazor_crypto_marketcap.Pages.Metrics;
 
 namespace blazor_crypto_marketcap.Data
 {
@@ -56,7 +56,7 @@ namespace blazor_crypto_marketcap.Data
             URL.Query = queryString.ToString();
 
             var client = new WebClient();
-            client.Headers.Add("Apikey", API_KEY);
+            client.Headers.Add("Apikey", API_KEY2);
             client.Headers.Add("Accepts", "application/json");
 
             return Task.FromResult(JsonConvert.DeserializeObject<CCRootObject>(client.DownloadString(URL.ToString())));
