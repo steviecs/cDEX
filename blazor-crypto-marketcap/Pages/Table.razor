@@ -1,0 +1,67 @@
+﻿@inject CoinMetricService CoinService
+@inject IJSRuntime JsRuntime
+@inject ProtectedSessionStorage ProtectedSessionStore
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th><span class="sort-link">#</span></th>
+                <th @onclick="@(e => SortTable("symbol"))"><span class="sort-link">name</span></th>
+                <th @onclick="@(e => SortTable("price"))"><span class="sort-link">price</span></th>
+                <th @onclick="@(e => SortTable("market_cap"))"><span class="sort-link">market cap</span></th>
+                <th @onclick="@(e => SortTable("volume_24h"))"><span class="sort-link">volume (24h)</span></th>
+                <th @onclick="@(e => SortTable("percent_change_1h"))"><span class="sort-link">change (1h)</span></th>
+                <th @onclick="@(e => SortTable("percent_change_24h"))"><span class="sort-link">change (24h)</span></th>
+                <th @onclick="@(e => SortTable("percent_change_7d"))"><span class="sort-link">change (7d)</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var metric in Coins.Data)
+            {
+                <tr class="table-rows" onclick="location.href='/chart/@metric.Symbol.ToString()'">
+                    <td>></td>
+                    <td>@metric.Symbol.ToString().ToLower()</td>
+                    <td>$@metric.Quote.USD.Price.ToString()</td>
+                    <td>$@metric.Quote.USD.Market_Cap.ToString()</td>
+                    <td>$@metric.Quote.USD.Volume_24h.ToString()</td>
+
+                    @if (@metric.Quote.USD.Percent_Change_1h.ToString().Contains("-") ||
+                      @metric.Quote.USD.Percent_Change_24h.ToString().Contains("-") ||
+                      @metric.Quote.USD.Percent_Change_7d.ToString().Contains("-"))
+                    {
+                        <td class="negative">@metric.Quote.USD.Percent_Change_1h.ToString()</td>
+                        <td class="negative">@metric.Quote.USD.Percent_Change_24h.ToString()</td>
+                        <td class="negative">@metric.Quote.USD.Percent_Change_7d.ToString()</td>
+                    }
+                    else
+                    {
+                        <td class="positive">@metric.Quote.USD.Percent_Change_1h.ToString()</td>
+                        <td class="positive">@metric.Quote.USD.Percent_Change_24h.ToString()</td>
+                        <td class="positive">@metric.Quote.USD.Percent_Change_7d.ToString()</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+
+@code {
+    public static RootObject Coins;
+
+    public static int Index = 1;
+    public static string? SortType { get; set; }
+    public static int CurrentCount { get; set; }
+
+    public async void SortTable(string columnName)
+    {
+        CurrentCount++;
+        SortType = columnName;
+
+        await ProtectedSessionStore.SetAsync("clickCount", CurrentCount);
+        await ProtectedSessionStore.SetAsync("sortType", columnName);
+
+        this.StateHasChanged();
+
+        SortType = await ProtectedSessionStore.GetAsync<string>("sortType");
+        Coins = await CoinService.GetTopOneHundredCoinsByMarketCap(Table.SortType);
+    }
+}

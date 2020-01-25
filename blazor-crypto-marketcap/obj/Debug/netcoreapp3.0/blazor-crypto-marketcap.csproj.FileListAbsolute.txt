@@ -145,3 +145,5 @@ C:\Users\Stevie\source\repos\blazor-crypto-marketcap\blazor-crypto-marketcap\obj
 C:\Users\Stevie\source\repos\blazor-crypto-marketcap\blazor-crypto-marketcap\obj\Debug\netcoreapp3.0\RazorDeclaration\Pages\Rss.razor.g.cs
 C:\Users\Stevie\source\repos\blazor-crypto-marketcap\blazor-crypto-marketcap\obj\Debug\netcoreapp3.0\Razor\Pages\Metrics.razor.g.cs
 C:\Users\Stevie\source\repos\blazor-crypto-marketcap\blazor-crypto-marketcap\obj\Debug\netcoreapp3.0\Razor\Pages\Rss.razor.g.cs
+C:\Users\Stevie\source\repos\blazor-crypto-marketcap\blazor-crypto-marketcap\obj\Debug\netcoreapp3.0\RazorDeclaration\Pages\Table.razor.g.cs
+C:\Users\Stevie\source\repos\blazor-crypto-marketcap\blazor-crypto-marketcap\obj\Debug\netcoreapp3.0\Razor\Pages\Table.razor.g.cs

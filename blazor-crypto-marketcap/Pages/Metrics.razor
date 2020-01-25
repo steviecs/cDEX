@@ -1,103 +1,28 @@
 ﻿@page "/metrics"
 
-@using blazor_crypto_marketcap.Data
 @inject CoinMetricService CoinService
 @inject IJSRuntime JsRuntime
-@using Microsoft.AspNetCore.ProtectedBrowserStorage
 @inject ProtectedSessionStorage ProtectedSessionStore
 
 <h4>coin metrics</h4>
 <p>this component demonstrates fetching data from an API</p>
 
-@if (coins == null)
+@if (Table.Coins == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th><span class="sort-link">#</span></th>
-                <th @onclick="@(e => SortTable("symbol"))"><span class="sort-link">name</span></th>
-                <th @onclick="@(e => SortTable("price"))"><span class="sort-link">price</span></th>
-                <th @onclick="@(e => SortTable("market_cap"))"><span class="sort-link">market cap</span></th>
-                <th @onclick="@(e => SortTable("volume_24h"))"><span class="sort-link">volume (24h)</span></th>
-                <th @onclick="@(e => SortTable("percent_change_1h"))"><span class="sort-link">change (1h)</span></th>
-                <th @onclick="@(e => SortTable("percent_change_24h"))"><span class="sort-link">change (24h)</span></th>
-                <th @onclick="@(e => SortTable("percent_change_7d"))"><span class="sort-link">change (7d)</span></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var metric in coins.Data)
-            {
-                <tr class="table-rows" onclick="location.href='/chart/@metric.Symbol.ToString()'">
-                    <td>></td>
-                    <td>@metric.Symbol.ToString().ToLower()</td>
-                    <td>$@metric.Quote.USD.Price.ToString()</td>
-                    <td>$@metric.Quote.USD.Market_Cap.ToString()</td>
-                    <td>$@metric.Quote.USD.Volume_24h.ToString()</td>
-
-                    @if (@metric.Quote.USD.Percent_Change_1h.ToString().Contains("-") ||
-        @metric.Quote.USD.Percent_Change_24h.ToString().Contains("-") ||
-        @metric.Quote.USD.Percent_Change_7d.ToString().Contains("-"))
-                    {
-                        <td class="negative">@metric.Quote.USD.Percent_Change_1h.ToString()</td>
-                        <td class="negative">@metric.Quote.USD.Percent_Change_24h.ToString()</td>
-                        <td class="negative">@metric.Quote.USD.Percent_Change_7d.ToString()</td>
-                    }
-                    else
-                    {
-                        <td class="positive">@metric.Quote.USD.Percent_Change_1h.ToString()</td>
-                        <td class="positive">@metric.Quote.USD.Percent_Change_24h.ToString()</td>
-                        <td class="positive">@metric.Quote.USD.Percent_Change_7d.ToString()</td>
-                    }
-                </tr>
-            }
-        </tbody>
-    </table>
+    <Table></Table>
 }
 
 @code {
-    public static RootObject coins;
-    List<Datum>
-    datum = new List<Datum>
-        ();
+    public static RootObject coins = Table.Coins;
 
-
-        int index = 1;
-        string? sortType { get; set; }
-        public static int currentCount { get; set; }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-        if (firstRender)
-        {
-        await LoadStateAsync();
+    protected override async Task OnInitializedAsync()
+    {
+        Table.SortType = await ProtectedSessionStore.GetAsync<string>("sortType");
+        Table.Coins = await CoinService.GetTopOneHundredCoinsByMarketCap(Table.SortType);
         StateHasChanged();
-        }
-        }
-
-        private async Task LoadStateAsync()
-        {
-        sortType = await ProtectedSessionStore.GetAsync<string>
-            ("sortType");
-            coins = await CoinService.GetTopOneHundredCoinsByMarketCap(sortType);
-            }
-
-            private async Task SortTable(string columnName)
-            {
-            currentCount++;
-            sortType = columnName;
-
-            await ProtectedSessionStore.SetAsync("clickCount", currentCount);
-            await ProtectedSessionStore.SetAsync("sortType", columnName);
-            await JsRuntime.InvokeAsync<object>
-                ("reloadPage");
-                }
-
-                private int IncrementCount()
-                {
-                return index++;
-                }
-                }
+    }
+}

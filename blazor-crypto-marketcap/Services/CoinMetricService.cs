@@ -2,9 +2,9 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
+using blazor_crypto_marketcap.Pages;
 using Newtonsoft.Json;
 using static blazor_crypto_marketcap.Data.CoinHistoricalData;
-using static blazor_crypto_marketcap.Pages.Metrics;
 
 namespace blazor_crypto_marketcap.Data
 {
@@ -23,13 +23,13 @@ namespace blazor_crypto_marketcap.Data
             if (sortType != null)
             {
                 queryString["sort"] = sortType;
-                if (currentCount % 2 == 0)
+                if (Table.CurrentCount % 2 == 0)
                 {
-                    queryString["sort_dir"] = "desc";
+                    queryString["sort_dir"] = "asc";
                 }
                 else
                 {
-                    queryString["sort_dir"] = "asc";
+                    queryString["sort_dir"] = "desc";
                 }
             }
 

@@ -79,6 +79,48 @@ using ChartJs.Blazor;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 11 "C:\Users\Stevie\source\repos\blazor-crypto-marketcap\blazor-crypto-marketcap\_Imports.razor"
+using ChartJs.Blazor.Charts;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 12 "C:\Users\Stevie\source\repos\blazor-crypto-marketcap\blazor-crypto-marketcap\_Imports.razor"
+using ChartJs.Blazor.ChartJS.LineChart;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 13 "C:\Users\Stevie\source\repos\blazor-crypto-marketcap\blazor-crypto-marketcap\_Imports.razor"
+using ChartJs.Blazor.ChartJS.Common.Properties;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 14 "C:\Users\Stevie\source\repos\blazor-crypto-marketcap\blazor-crypto-marketcap\_Imports.razor"
+using ChartJs.Blazor.ChartJS.Common;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 15 "C:\Users\Stevie\source\repos\blazor-crypto-marketcap\blazor-crypto-marketcap\_Imports.razor"
+using blazor_crypto_marketcap.Data;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 16 "C:\Users\Stevie\source\repos\blazor-crypto-marketcap\blazor-crypto-marketcap\_Imports.razor"
+using Microsoft.AspNetCore.ProtectedBrowserStorage;
+
+#line default
+#line hidden
+#nullable disable
     public class App : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
