@@ -16,20 +16,19 @@ else
 }
 
 @code {
-
     [Parameter]
     public string Symbol { get; set; }
 
     LineConfig lineConfig;
     ChartJsLineChart lineChartJs;
-    private LineDataset<Point> pointDataset;
+    private LineDataset<CoinHistoricalData.Datum> pointDataset;
     private Random rnd = new Random();
 
     protected override async Task OnInitializedAsync()
     {
-        var historicalData = CoinService.GetHistoricalChartData(Symbol);
+        var historicalData = await CoinService.GetHistoricalChartData(Symbol);
 
-        var data = historicalData.Result.Data.Datum;
+        var data = historicalData.Data.data;
 
         lineConfig = new LineConfig()
         {
@@ -44,16 +43,16 @@ else
             }
         };
 
-        //lineConfig.Data.Labels.AddRange(new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N" });
+        lineConfig.Data.Labels.AddRange(new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N" });
 
-        pointDataset = new LineDataset<Point>()
+        pointDataset = new LineDataset<CoinHistoricalData.Datum>()
         {
             BackgroundColor = "#24374A",
             BorderWidth = 0,
             BorderColor = "#438081",
         };
 
-        pointDataset.AddRange(Enumerable.Range(1, 10).Select(i => new Point(i, rnd.Next(30))));
+        pointDataset.AddRange(new CoinHistoricalData.Data(data).data);
 
         lineConfig.Data.Datasets.Add(pointDataset);
     }

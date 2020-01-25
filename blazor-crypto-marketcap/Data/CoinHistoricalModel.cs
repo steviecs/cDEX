@@ -23,10 +23,20 @@ namespace blazor_crypto_marketcap.Data
 
         public class Data
         {
+            public Data(List<Datum> datum)
+            {
+                data = datum;
+            }
+
+            public Data()
+            {
+
+            }
+
             public bool Aggregated { get; set; }
             public int TimeFrom { get; set; }
             public int TimeTo { get; set; }
-            public List<Datum> Datum { get; set; }
+            public List<Datum> data { get; set; }
         }
 
         public class CCRootObject

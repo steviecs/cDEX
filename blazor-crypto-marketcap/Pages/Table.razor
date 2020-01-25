@@ -47,7 +47,7 @@
 @code {
     public static RootObject Coins;
 
-    public static int Index = 1;
+    public static int Index = 0;
     public static string? SortType { get; set; }
     public static int CurrentCount { get; set; }
 
@@ -59,9 +59,9 @@
         await ProtectedSessionStore.SetAsync("clickCount", CurrentCount);
         await ProtectedSessionStore.SetAsync("sortType", columnName);
 
-        this.StateHasChanged();
-
         SortType = await ProtectedSessionStore.GetAsync<string>("sortType");
         Coins = await CoinService.GetTopOneHundredCoinsByMarketCap(Table.SortType);
+
+        this.StateHasChanged();
     }
 }
