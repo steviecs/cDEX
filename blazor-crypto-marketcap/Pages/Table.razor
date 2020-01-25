@@ -21,23 +21,23 @@
                 <tr class="table-rows" onclick="location.href='/chart/@metric.Symbol.ToString()'">
                     <td>></td>
                     <td>@metric.Symbol.ToString().ToLower()</td>
-                    <td>$@metric.Quote.USD.Price.ToString()</td>
-                    <td>$@metric.Quote.USD.Market_Cap.ToString()</td>
-                    <td>$@metric.Quote.USD.Volume_24h.ToString()</td>
+                    <td>$@metric.Quote.USD.Price</td>
+                    <td>$@metric.Quote.USD.Market_Cap</td>
+                    <td>$@metric.Quote.USD.Volume_24h</td>
 
                     @if (@metric.Quote.USD.Percent_Change_1h.ToString().Contains("-") ||
                       @metric.Quote.USD.Percent_Change_24h.ToString().Contains("-") ||
                       @metric.Quote.USD.Percent_Change_7d.ToString().Contains("-"))
                     {
-                        <td class="negative">@metric.Quote.USD.Percent_Change_1h.ToString()</td>
-                        <td class="negative">@metric.Quote.USD.Percent_Change_24h.ToString()</td>
-                        <td class="negative">@metric.Quote.USD.Percent_Change_7d.ToString()</td>
+                        <td class="negative">@metric.Quote.USD.Percent_Change_1h</td>
+                        <td class="negative">@metric.Quote.USD.Percent_Change_24h</td>
+                        <td class="negative">@metric.Quote.USD.Percent_Change_7d</td>
                     }
                     else
                     {
-                        <td class="positive">@metric.Quote.USD.Percent_Change_1h.ToString()</td>
-                        <td class="positive">@metric.Quote.USD.Percent_Change_24h.ToString()</td>
-                        <td class="positive">@metric.Quote.USD.Percent_Change_7d.ToString()</td>
+                        <td class="positive">@metric.Quote.USD.Percent_Change_1h</td>
+                        <td class="positive">@metric.Quote.USD.Percent_Change_24h</td>
+                        <td class="positive">@metric.Quote.USD.Percent_Change_7d</td>
                     }
                 </tr>
             }

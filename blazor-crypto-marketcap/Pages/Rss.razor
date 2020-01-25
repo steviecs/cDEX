@@ -4,7 +4,7 @@
 
 <p>this component demonstrates subscribing to an rss feed</p>
 
-@if (feeds == null)
+@if (Feeds == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -13,25 +13,24 @@ else
     counter = 0;
     <table class='table'>
         <tbody>
-            @foreach (var feed in feeds)
+            @foreach (var feed in Feeds)
             {
-                <tr class="table-rows" id="link" href="/@feed.Link2">
+                <tr class="table-rows" id="link" target="_blank" onclick="location.href='@feed.Link2'">
                     > @feed.Title.ToLower()
                     <br />
-                    <p>  @feed.PubDate</p>
+                    <p>@feed.PubDate</p>
                 </tr>
             }
         </tbody>
     </table>
 }
 @code {
-    IEnumerable<Item> feeds;
+    IEnumerable<Item> Feeds;
     int counter;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        //feeds = null;
-        feeds = FeedService.GetFeed();
+        Feeds = FeedService.GetFeed();
     }
 
 }
