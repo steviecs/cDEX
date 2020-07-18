@@ -13,7 +13,7 @@ namespace blazor_crypto_marketcap.Data
         private static string API_KEY = "1dd4128e-cdd1-418d-8907-a547d44d9996";
         private static string API_KEY2 = "8df36f303ab2e288d965f0492f9d79c36e53d2f90603e9035434ec9c426212ea";
 
-        public Task<RootObject> GetTopOneHundredCoinsByMarketCap(string sortType = null)
+        public Task<Coins> GetTopOneHundredCoinsByMarketCap(string sortType = null)
         {
             var URL = new UriBuilder("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest");
 
@@ -40,11 +40,11 @@ namespace blazor_crypto_marketcap.Data
                 client.Headers.Add("X-CMC_PRO_API_KEY", API_KEY);
                 client.Headers.Add("Accepts", "application/json");
 
-                return Task.FromResult(JsonConvert.DeserializeObject<RootObject>(client.DownloadString(URL.ToString())));
+                return Task.FromResult(JsonConvert.DeserializeObject<Coins>(client.DownloadString(URL.ToString())));
             }
         }
 
-        public Task<CCRootObject> GetHistoricalChartData(string symbol)
+        public Task<CoinData> GetHistoricalChartData(string symbol)
         {
             var URL = new UriBuilder("https://min-api.cryptocompare.com/data/v2/histoday");
 
@@ -59,7 +59,7 @@ namespace blazor_crypto_marketcap.Data
             client.Headers.Add("Apikey", API_KEY2);
             client.Headers.Add("Accepts", "application/json");
 
-            return Task.FromResult(JsonConvert.DeserializeObject<CCRootObject>(client.DownloadString(URL.ToString())));
+            return Task.FromResult(JsonConvert.DeserializeObject<CoinData>(client.DownloadString(URL.ToString())));
         }
     }
 }

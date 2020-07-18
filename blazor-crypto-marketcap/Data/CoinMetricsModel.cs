@@ -58,7 +58,7 @@ namespace blazor_crypto_marketcap.Data
         public int Credit_Count { get; set; }
     }
 
-    public class RootObject
+    public class Coins
     {
         public List<Datum> Data { get; set; }
         public Status Status { get; set; }

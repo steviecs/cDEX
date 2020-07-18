@@ -21,12 +21,12 @@ namespace blazor_crypto_marketcap.Data
                               select new Item
                               {
                                   Title = item.Elements().First(i => i.Name.LocalName == "title").Value,
-                                  Link2 = (item.Elements().First(i => i.Name.LocalName == "link").Value).StartsWith("/") ? "https://www.c-sharpcorner.com" + item.Elements().First(i => i.Name.LocalName == "link").Value : item.Elements().First(i => i.Name.LocalName == "link").Value,
+                                  Link2 = item.Elements().First(i => i.Name.LocalName == "link").Value,
                                   PubDate = Convert.ToDateTime(item.Elements().First(i => i.Name.LocalName == "pubDate").Value, culture).ToString("dd-MMM-yyyy"),
                               };
 
-                var heck = entries.OrderByDescending(o => o.PubDate);
-                return heck;
+                var sortedEntries = entries.OrderByDescending(o => o.PubDate);
+                return sortedEntries;
             }
             catch  
             {  

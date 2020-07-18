@@ -39,7 +39,7 @@ namespace blazor_crypto_marketcap.Data
             public List<Datum> data { get; set; }
         }
 
-        public class CCRootObject
+        public class CoinData
         {
             public string Response { get; set; }
             public string Message { get; set; }

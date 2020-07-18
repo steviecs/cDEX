@@ -10,7 +10,6 @@
 }
 else
 {
-    counter = 0;
     <table class='table'>
         <tbody>
             @foreach (var feed in Feeds)
@@ -26,7 +25,6 @@ else
 }
 @code {
     IEnumerable<Item> Feeds;
-    int counter;
 
     protected override void OnInitialized()
     {

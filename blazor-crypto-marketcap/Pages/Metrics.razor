@@ -17,11 +17,10 @@ else
 }
 
 @code {
-    public static RootObject coins = Table.Coins;
+    public static Coins coins = Table.Coins;
 
     protected override async Task OnInitializedAsync()
     {
-        Table.SortType = await ProtectedSessionStore.GetAsync<string>("sortType");
         Table.Coins = await CoinService.GetTopOneHundredCoinsByMarketCap(Table.SortType);
         StateHasChanged();
     }
