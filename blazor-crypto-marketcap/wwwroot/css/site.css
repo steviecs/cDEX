@@ -1,7 +1,7 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: Consolas;
+    font-family: 'Source Sans Pro', sans-serif;
     background-color: #24374A;
     color: #64CAFF;
     font-weight: bold;
@@ -182,20 +182,6 @@ app {
         border-right: none;
         border-left: none;
     }
-
-        table tr {
-            border-top: 1.5px solid #63C9B8;
-            border-bottom: 1.5px solid #63C9B8;
-            border-right: none;
-            border-left: none;
-        }
-
-        table thead {
-            border-top: 1.5px solid #63C9B8;
-            border-bottom: 1.5px solid #63C9B8;
-            border-right: none;
-            border-left: none;
-        }
 
     td {
         border: none;

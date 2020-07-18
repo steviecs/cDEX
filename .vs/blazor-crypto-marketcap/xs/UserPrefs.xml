@@ -1,15 +1,17 @@
 ﻿<Properties StartupConfiguration="{B2AF3D27-BBCC-4FCD-B5BD-12E74288E583}|Default">
   <MonoDevelop.Ide.ItemProperties.blazor-crypto-marketcap PreferredExecutionTarget="/Applications/Brave Browser.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="blazor-crypto-marketcap/Services/FeedService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="blazor-crypto-marketcap/Pages/_Host.cshtml">
     <Files>
-      <File FileName="blazor-crypto-marketcap/Shared/NavMenu.razor" Line="2" Column="34" />
-      <File FileName="blazor-crypto-marketcap/wwwroot/css/site.css" Line="108" Column="24" />
+      <File FileName="blazor-crypto-marketcap/Shared/NavMenu.razor" Line="26" Column="29" />
+      <File FileName="blazor-crypto-marketcap/wwwroot/css/site.css" Line="1" Column="67" />
       <File FileName="blazor-crypto-marketcap/Shared/MainLayout.razor" Line="7" Column="19" />
-      <File FileName="blazor-crypto-marketcap/Pages/Index.razor" Line="2" Column="1" />
+      <File FileName="blazor-crypto-marketcap/Pages/Index.razor" Line="32" Column="50" />
       <File FileName="blazor-crypto-marketcap/Pages/Metrics.razor" Line="1" Column="1" />
-      <File FileName="blazor-crypto-marketcap/Pages/Rss.razor" Line="31" Column="23" />
+      <File FileName="blazor-crypto-marketcap/Pages/Rss.razor" Line="18" Column="19" />
       <File FileName="blazor-crypto-marketcap/Pages/Table.razor" Line="21" Column="36" />
       <File FileName="blazor-crypto-marketcap/Services/FeedService.cs" Line="12" Column="18" />
+      <File FileName="blazor-crypto-marketcap/App.razor" Line="1" Column="1" />
+      <File FileName="blazor-crypto-marketcap/Pages/_Host.cshtml" Line="15" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -18,13 +20,21 @@
             <Node name="blazor-crypto-marketcap" expanded="True">
               <Node name="Dependencies" expanded="True" />
               <Node name="Data" expanded="True" />
-              <Node name="Pages" expanded="True" />
-              <Node name="Services" expanded="True">
-                <Node name="FeedService.cs" selected="True" />
+              <Node name="Pages" expanded="True">
+                <Node name="_Host.cshtml" selected="True" />
               </Node>
+              <Node name="Properties" expanded="True" />
+              <Node name="Services" expanded="True" />
               <Node name="Shared" expanded="True" />
               <Node name="wwwroot" expanded="True">
-                <Node name="css" expanded="True" />
+                <Node name="css" expanded="True">
+                  <Node name="bootstrap" expanded="True" />
+                  <Node name="open-iconic" expanded="True">
+                    <Node name="font" expanded="True">
+                      <Node name="fonts" expanded="True" />
+                    </Node>
+                  </Node>
+                </Node>
               </Node>
               <Node name="appsettings.json" expanded="True" />
             </Node>
