@@ -14,11 +14,11 @@ else
         <tbody>
             @foreach (var feed in Feeds)
             {
-                <tr class="table-rows" id="link" target="_blank" onclick="location.href='@feed.Link2'">
-                    > @feed.Title.ToLower()
-                    <br />
-                    <p>@feed.PubDate</p>
-                </tr>
+            <tr class="table-rows" id="link" target="_blank" onclick="location.href='@feed.Link2'">
+                > @feed.Title.ToLower()
+
+                <p style="color: #FFAD30">@feed.PubDate</p>
+            </tr>
             }
         </tbody>
     </table>

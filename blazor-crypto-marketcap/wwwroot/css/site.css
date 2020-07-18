@@ -104,13 +104,12 @@ app {
 }
 
 .nav-item a:hover {
-    background-color: rgba(255,255,255,0.1);
-    color: white;
+    background-color: #e7d757;
+    color: #24374A;
 }
 
 .content {
     padding-top: 1.1rem;
-    border-top: 1px solid #438081;
 }
 
 .navbar-toggler {
@@ -176,6 +175,27 @@ app {
         border-right: none;
         border-left: none;
     }
+
+    table td {
+        border-top: 1.5px solid #63C9B8;
+        border-bottom: 1.5px solid #63C9B8;
+        border-right: none;
+        border-left: none;
+    }
+
+        table tr {
+            border-top: 1.5px solid #63C9B8;
+            border-bottom: 1.5px solid #63C9B8;
+            border-right: none;
+            border-left: none;
+        }
+
+        table thead {
+            border-top: 1.5px solid #63C9B8;
+            border-bottom: 1.5px solid #63C9B8;
+            border-right: none;
+            border-left: none;
+        }
 
     td {
         border: none;
