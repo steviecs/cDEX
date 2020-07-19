@@ -121,6 +121,13 @@ using Microsoft.AspNetCore.ProtectedBrowserStorage;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 17 "/Users/ssullivan/cDEX/blazor-crypto-marketcap/_Imports.razor"
+using System.Globalization;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/error")]
     public partial class Error : Microsoft.AspNetCore.Components.ComponentBase
     {

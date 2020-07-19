@@ -22,9 +22,9 @@
         <tr class="table-rows" onclick="location.href='/chart/@metric.Symbol.ToString()'">
             <td>></td>
             <td>@metric.Symbol.ToString().ToLower()</td>
-            <td>$@Format(metric.Quote.USD.Price)</td>
-            <td>$@Format(metric.Quote.USD.Market_Cap)</td>
-            <td>$@Format(metric.Quote.USD.Volume_24h)</td>
+            <td>@Format(metric.Quote.USD.Price)</td>
+            <td>@Format(metric.Quote.USD.Market_Cap)</td>
+            <td>@Format(metric.Quote.USD.Volume_24h)</td>
 
             @if (@metric.Quote.USD.Percent_Change_1h.ToString().Contains("-"))
             {
