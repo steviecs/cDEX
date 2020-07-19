@@ -11,7 +11,6 @@ namespace blazor_crypto_marketcap.Data
         public decimal? Percent_Change_24h { get; set; }
         public decimal? Percent_Change_7d { get; set; }
         public decimal? Market_Cap { get; set; }
-        public DateTime Last_Updated { get; set; }
     }
 
     public class BTC

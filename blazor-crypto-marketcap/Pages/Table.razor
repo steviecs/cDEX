@@ -1,53 +1,80 @@
 ﻿@inject CoinMetricService CoinService
 @inject IJSRuntime JsRuntime
 @inject ProtectedSessionStorage ProtectedSessionStore
+@using System.Globalization;
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th><span class="sort-link">#</span></th>
-                <th @onclick="@(e => SortTable("symbol"))"><span class="sort-link">name</span></th>
-                <th @onclick="@(e => SortTable("price"))"><span class="sort-link">price</span></th>
-                <th @onclick="@(e => SortTable("market_cap"))"><span class="sort-link">market cap</span></th>
-                <th @onclick="@(e => SortTable("volume_24h"))"><span class="sort-link">volume (24h)</span></th>
-                <th @onclick="@(e => SortTable("percent_change_1h"))"><span class="sort-link">change (1h)</span></th>
-                <th @onclick="@(e => SortTable("percent_change_24h"))"><span class="sort-link">change (24h)</span></th>
-                <th @onclick="@(e => SortTable("percent_change_7d"))"><span class="sort-link">change (7d)</span></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var metric in Coins.Data)
+<table class="table">
+    <thead>
+        <tr>
+            <th><span class="sort-link">#</span></th>
+            <th @onclick="@(e => SortTable("symbol"))"><span class="sort-link">name</span></th>
+            <th @onclick="@(e => SortTable("price"))"><span class="sort-link">price</span></th>
+            <th @onclick="@(e => SortTable("market_cap"))"><span class="sort-link">market cap</span></th>
+            <th @onclick="@(e => SortTable("volume_24h"))"><span class="sort-link">volume (24h)</span></th>
+            <th @onclick="@(e => SortTable("percent_change_1h"))"><span class="sort-link">change (1h)</span></th>
+            <th @onclick="@(e => SortTable("percent_change_24h"))"><span class="sort-link">change (24h)</span></th>
+            <th @onclick="@(e => SortTable("percent_change_7d"))"><span class="sort-link">change (7d)</span></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var metric in Coins.Data)
+        {
+        <tr class="table-rows" onclick="location.href='/chart/@metric.Symbol.ToString()'">
+            <td>></td>
+            <td>@metric.Symbol.ToString().ToLower()</td>
+            <td>$@Format(metric.Quote.USD.Price)</td>
+            <td>$@Format(metric.Quote.USD.Market_Cap)</td>
+            <td>$@Format(metric.Quote.USD.Volume_24h)</td>
+
+            @if (@metric.Quote.USD.Percent_Change_1h.ToString().Contains("-"))
             {
-                <tr class="table-rows" onclick="location.href='/chart/@metric.Symbol.ToString()'">
-                    <td>></td>
-                    <td>@metric.Symbol.ToString().ToLower()</td>
-                    <td>$@metric.Quote.USD.Price</td>
-                    <td>$@metric.Quote.USD.Market_Cap</td>
-                    <td>$@metric.Quote.USD.Volume_24h</td>
-
-                    @if (@metric.Quote.USD.Percent_Change_1h.ToString().Contains("-") ||
-                      @metric.Quote.USD.Percent_Change_24h.ToString().Contains("-") ||
-                      @metric.Quote.USD.Percent_Change_7d.ToString().Contains("-"))
-                    {
-                        <td class="negative">@metric.Quote.USD.Percent_Change_1h</td>
-                        <td class="negative">@metric.Quote.USD.Percent_Change_24h</td>
-                        <td class="negative">@metric.Quote.USD.Percent_Change_7d</td>
-                    }
-                    else
-                    {
-                        <td class="positive">@metric.Quote.USD.Percent_Change_1h</td>
-                        <td class="positive">@metric.Quote.USD.Percent_Change_24h</td>
-                        <td class="positive">@metric.Quote.USD.Percent_Change_7d</td>
-                    }
-                </tr>
+                <td class="negative">@FormatPercentage(metric.Quote.USD.Percent_Change_1h)%</td>
             }
-        </tbody>
-    </table>
+            else
+            {
+                <td class="positive">@FormatPercentage(metric.Quote.USD.Percent_Change_1h)%</td>
+            }
+            @if (@metric.Quote.USD.Percent_Change_24h.ToString().Contains("-"))
+            {
+                <td class="negative">@FormatPercentage(metric.Quote.USD.Percent_Change_24h)%</td>
+            }
+            else
+            {
+                <td class="positive">@FormatPercentage(metric.Quote.USD.Percent_Change_24h)%</td>
+            }
+            @if (@metric.Quote.USD.Percent_Change_7d.ToString().Contains("-"))
+            {
+                <td class="negative">@FormatPercentage(metric.Quote.USD.Percent_Change_7d)%</td>
+            }
+            else
+            {
+                <td class="positive">@FormatPercentage(metric.Quote.USD.Percent_Change_7d)%</td>
+            }
+        </tr>
+        }
+    </tbody>
+</table>
 
 @code {
     public static Coins Coins;
     public static string? SortType { get; set; }
     public static int CurrentCount { get; set; }
+    public static string className { get; set; }
+
+    public string Format(decimal? d)
+    {
+        if (d.ToString().StartsWith("0.00"))
+        {
+            return d != null ? String.Format("{0:C8}", d).Replace("¤", "") : "";
+        }
+
+        return d != null ? String.Format("{0:C2}", d).Replace("¤", "") : "";
+    }
+
+    public string FormatPercentage(decimal? d)
+    {
+        return d != null ? d.ToString() : "";
+    }
 
     public async void SortTable(string columnName)
     {
