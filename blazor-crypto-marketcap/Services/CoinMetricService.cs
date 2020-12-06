@@ -51,7 +51,10 @@ namespace blazor_crypto_marketcap.Data
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             queryString["fsym"] = symbol;
             queryString["tsym"] = "USD";
-            queryString["limit"] = "14";
+            queryString["limit"] = "100";
+            queryString["aggregate"] = "1";
+            queryString["aggregatePredictableTimePeriods"] = "true";
+            // queryString["allData"] = "true";
 
             URL.Query = queryString.ToString();
 

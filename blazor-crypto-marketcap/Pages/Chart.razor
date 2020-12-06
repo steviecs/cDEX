@@ -1,59 +1,81 @@
 ﻿@page "/chart/{symbol}"
+@using ChartJs.Blazor.ChartJS.Common.Axes
+@using ChartJs.Blazor.ChartJS.Common.Enums
 @inject CoinMetricService CoinService
-@inject ProtectedSessionStorage ProtectedSessionStore
 
 <h4>@Symbol.ToLower()</h4>
 
-<p>this component demonstrates fetching charting data from an API</p>
+<p>this component demonstrates charting data from an API response</p>
 
-@if (lineConfig == null)
+@if (LineConfig == null)
 {
     <p><em>loading...</em></p>
 }
 else
 {
-    <ChartJsLineChart @ref="lineChartJs" Config="@lineConfig" Width="600" Height="300" />
+    <ChartJsLineChart @ref="@LineChartJs" Config="@LineConfig" Width="600" Height="300" />
 }
 
 @code {
     [Parameter]
     public string Symbol { get; set; }
-
-    LineConfig lineConfig;
-    ChartJsLineChart lineChartJs;
-    private LineDataset<CoinHistoricalData.Datum> pointDataset;
-    private Random rnd = new Random();
+    private LineConfig LineConfig { get; set; }
+    private ChartJsLineChart LineChartJs { get; set; }
+    private LineDataset<Point> PointDataset { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         var historicalData = await CoinService.GetHistoricalChartData(Symbol);
 
-        var data = historicalData.Data.data;
-
-        lineConfig = new LineConfig()
+        LineConfig = new LineConfig()
         {
             Options = new LineOptions()
             {
                 Title = new OptionsTitle()
                 {
                     Display = true,
-                    Text = "Stonks"
+                    Text = Symbol
                 },
-                Responsive = true
+                Responsive = true,
+                Tooltips = new Tooltips
+                {
+                    Mode = InteractionMode.Nearest,
+                    Intersect = false
+                },
+                Scales = new Scales
+                {
+                    xAxes = new List<CartesianAxis>
+                    {
+                        new LinearCartesianAxis
+                        {
+                            ScaleLabel = new ScaleLabel
+                            {
+                                LabelString = "Time"
+                            }
+                        }
+                    },
+                    yAxes = new List<CartesianAxis>()
+                    {
+                        new LinearCartesianAxis
+                        {
+                            ScaleLabel = new ScaleLabel
+                            {
+                                LabelString = "Value"
+                            }
+                        }
+                    }
+                }
             }
         };
 
-        lineConfig.Data.Labels.AddRange(new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N" });
-
-        pointDataset = new LineDataset<CoinHistoricalData.Datum>()
+        PointDataset = new LineDataset<Point>()
         {
             BackgroundColor = "#24374A",
             BorderWidth = 0,
             BorderColor = "#438081",
         };
-
-        pointDataset.AddRange(new CoinHistoricalData.Data(data).data);
-
-        lineConfig.Data.Datasets.Add(pointDataset);
+        
+        PointDataset.AddRange(historicalData.Data.data.Select(i => new Point(i.Time, i.Close)));
+        LineConfig.Data.Datasets.Add(PointDataset);
     }
 }

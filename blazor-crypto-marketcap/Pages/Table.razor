@@ -1,7 +1,6 @@
 ﻿@inject CoinMetricService CoinService
 @inject IJSRuntime JsRuntime
 @inject ProtectedSessionStorage ProtectedSessionStore
-@using System.Globalization;
 
 <table class="table">
     <thead>
@@ -19,9 +18,9 @@
     <tbody>
         @foreach (var metric in Coins.Data)
         {
-        <tr class="table-rows" onclick="location.href='/chart/@metric.Symbol.ToString()'">
+        <tr class="table-rows" onclick="location.href='/chart/@metric.Symbol'">
             <td>></td>
-            <td>@metric.Symbol.ToString().ToLower()</td>
+            <td>@metric.Symbol.ToLower()</td>
             <td>@Format(metric.Quote.USD.Price)</td>
             <td>@Format(metric.Quote.USD.Market_Cap)</td>
             <td>@Format(metric.Quote.USD.Volume_24h)</td>
@@ -56,12 +55,11 @@
 </table>
 
 @code {
-    public static Coins Coins;
+    public static Coins Coins { get; set; }
     public static string? SortType { get; set; }
     public static int CurrentCount { get; set; }
-    public static string className { get; set; }
 
-    public string Format(decimal? d)
+    private string Format(decimal? d)
     {
         if (d.ToString().StartsWith("0.00"))
         {
@@ -71,12 +69,12 @@
         return d != null ? String.Format("{0:C2}", d).Replace("¤", "") : "";
     }
 
-    public string FormatPercentage(decimal? d)
+    private string FormatPercentage(decimal? d)
     {
         return d != null ? d.ToString() : "";
     }
 
-    public async void SortTable(string columnName)
+    private async void SortTable(string columnName)
     {
         CurrentCount++;
         SortType = columnName;
@@ -85,7 +83,7 @@
         await ProtectedSessionStore.SetAsync("sortType", columnName);
 
         SortType = await ProtectedSessionStore.GetAsync<string>("sortType");
-        Coins = await CoinService.GetTopOneHundredCoinsByMarketCap(Table.SortType);
+        Coins = await CoinService.GetTopOneHundredCoinsByMarketCap(SortType);
 
         this.StateHasChanged();
     }

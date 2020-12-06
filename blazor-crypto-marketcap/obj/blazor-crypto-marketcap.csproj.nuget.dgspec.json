@@ -1,29 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/home/skrmzmtn/Downloads/cDEX/blazor-crypto-marketcap/blazor-crypto-marketcap.csproj": {}
+    "/Users/ssullivan/RiderProjects/cDEX-1/blazor-crypto-marketcap/blazor-crypto-marketcap.csproj": {}
   },
   "projects": {
-    "/home/skrmzmtn/Downloads/cDEX/blazor-crypto-marketcap/blazor-crypto-marketcap.csproj": {
+    "/Users/ssullivan/RiderProjects/cDEX-1/blazor-crypto-marketcap/blazor-crypto-marketcap.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/skrmzmtn/Downloads/cDEX/blazor-crypto-marketcap/blazor-crypto-marketcap.csproj",
+        "projectUniqueName": "/Users/ssullivan/RiderProjects/cDEX-1/blazor-crypto-marketcap/blazor-crypto-marketcap.csproj",
         "projectName": "blazor-crypto-marketcap",
-        "projectPath": "/home/skrmzmtn/Downloads/cDEX/blazor-crypto-marketcap/blazor-crypto-marketcap.csproj",
-        "packagesPath": "/home/skrmzmtn/.nuget/packages/",
-        "outputPath": "/home/skrmzmtn/Downloads/cDEX/blazor-crypto-marketcap/obj/",
+        "projectPath": "/Users/ssullivan/RiderProjects/cDEX-1/blazor-crypto-marketcap/blazor-crypto-marketcap.csproj",
+        "packagesPath": "/Users/ssullivan/.nuget/packages/",
+        "outputPath": "/Users/ssullivan/RiderProjects/cDEX-1/blazor-crypto-marketcap/obj/",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "/home/skrmzmtn/.nuget/NuGet/NuGet.Config"
+          "/Users/ssullivan/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.0"
+          "netcoreapp3.1"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.0": {
+          "netcoreapp3.1": {
             "projectReferences": {}
           }
         },
@@ -34,7 +37,7 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.0": {
+        "netcoreapp3.1": {
           "dependencies": {
             "Blazored.LocalStorage": {
               "target": "Package",
@@ -97,20 +100,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[3.0.1, 3.0.1]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.linux-x64",
-              "version": "[3.0.3, 3.0.3]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[3.0.0, 3.0.0]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -119,7 +108,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.108/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.302/RuntimeIdentifierGraph.json"
         }
       }
     }
