@@ -10,8 +10,8 @@ namespace blazor_crypto_marketcap.Data
 {
     public class CoinMetricService
     {
-        private static string API_KEY = "1dd4128e-cdd1-418d-8907-a547d44d9996";
-        private static string API_KEY2 = "8df36f303ab2e288d965f0492f9d79c36e53d2f90603e9035434ec9c426212ea";
+        private static string API_KEY = "<>";
+        private static string API_KEY2 = "<>";
 
         public Task<Coins> GetTopOneHundredCoinsByMarketCap(string sortType = null)
         {
